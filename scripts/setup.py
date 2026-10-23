@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""python3 scripts/setup.py --url https://YOU.github.io[/REPO]   fills the social-card URLs (run once)
+"""python3 scripts/setup.py --url https://zerototruck.github.io   fills the social-card URLs (run once)
 python3 scripts/setup.py --localize                           downloads the fonts and the hero photo into assets/ and rewires the site
 After --localize run:  python3 scripts/add_csp.py             (locks the page so it can only load its own files)
 Stdlib only (Pillow optional, for WebP). --localize needs internet and edits files only after every download succeeded.
