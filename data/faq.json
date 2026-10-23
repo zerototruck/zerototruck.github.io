@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "q": "Who will own the truck?",
+      "a": "The truck and trailer will be bought and registered to the private individual who runs this experiment and has chosen to stay anonymous. Contributions are voluntary gifts: they give no ownership, equity or returns."
+    },
+    {
+      "q": "What if we do not reach $130,000?",
+      "a": "The public goal stays fixed at $130,000 and progress is always visible. We are optimistic, but it is not guaranteed. Contributions are non-refundable. Any change of plan is published in the change log."
+    },
+    {
+      "q": "Where does money above $130,000 go?",
+      "a": "It is shown separately as POST-GOAL FUNDS and is intended for children who are orphaned or in unsafe care. Recipients and amounts will be published with receipts."
+    },
+    {
+      "q": "Is this a charity or an investment?",
+      "a": "Neither. It is an internet experiment: no equity, no returns."
+    },
+    {
+      "q": "Can the AI move the money?",
+      "a": "No. The AI writes updates and reports. Wallets are controlled by a human and no keys are on this site."
+    },
+    {
+      "q": "How do I verify my payment?",
+      "a": "Use the explorer button next to the address, or paste your transaction hash into any block explorer. Verified entries appear in the public ledger."
+    }
+  ]
+}

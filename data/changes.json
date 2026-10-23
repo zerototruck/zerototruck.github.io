@@ -1,0 +1,19 @@
+{
+  "entries": [
+    {
+      "date": "2026-10-07",
+      "type": "wallets",
+      "text": "Public wallets published: BTC, ETH, SOL, BNB, DOGE."
+    },
+    {
+      "date": "2026-10-07",
+      "type": "budget",
+      "text": "Public goal set at $130,000 ($100,000 tractor/truck + $30,000 trailer)."
+    },
+    {
+      "date": "2026-10-22",
+      "type": "wallets",
+      "text": "Added wallets: USDT (Ethereum), USDC (Ethereum), XRP, TRX, HYPE."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "verified_raised_usd": 0.0,
+  "updated": null,
+  "coverage": {
+    "auto_tracked": [],
+    "manual_only": [],
+    "incomplete": [],
+    "balance_check": {
+      "checked": [],
+      "discrepancies": []
+    },
+    "recheck": {
+      "checked": 0,
+      "unconfirmed": []
+    }
+  }
+}
