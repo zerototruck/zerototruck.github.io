@@ -11,9 +11,14 @@
       "text": "Public goal set at $130,000 ($100,000 tractor/truck + $30,000 trailer)."
     },
     {
-      "date": "2026-10-22",
+      "date": "2026-10-23",
       "type": "wallets",
-      "text": "Added wallets: USDT (Ethereum), USDC (Ethereum), XRP, TRX, HYPE."
+      "text": "Added wallets: USDT (ERC-20, TRC-20, BEP-20), USDC (ERC-20), XRP, TRX."
+    },
+    {
+      "date": "2026-10-26",
+      "type": "analytics",
+      "text": "Added anonymous, cookie-free visit counts (GoatCounter). No cookies, no ad tracking, no visitor profiles."
     }
   ]
 }
