@@ -1,1 +1,51 @@
-
+# Hourly ledger update. The ONLY workflow that can write, and only data/ledger.json, data/progress.json, data/state.json.
+# It does not run on push or pull_request, so nobody can trigger a write by opening a PR.
+name: ledger
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: ledger
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Safety checks before anything is touched
+        run: |
+          python3 -I scripts/verify_addresses.py
+          python3 -I scripts/verify_data.py
+      - name: Update the ledger (reads public chain data only)
+        id: upd
+        run: |
+          set +e
+          python3 -I scripts/update_data.py
+          code=$?
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then exit "$code"; fi
+      - name: Only the three data files may have changed, and the ledger may only grow
+        run: python3 -I scripts/verify_data.py --base HEAD --bot-changes-only
+      - name: Commit and push (the token exists only in this step)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git add data/ledger.json data/progress.json data/state.json
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git -c user.name="ledger-bot" -c user.email="ledger-bot@users.noreply.github.com" commit -q -m "ledger: update"
+          AUTH=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
+          echo "::add-mask::$AUTH"
+          git -c http.extraheader="AUTHORIZATION: basic $AUTH" push origin HEAD:${GITHUB_REF_NAME}
+      - name: Go red when a person has to look (balance mismatch, missing history, vanished transaction)
+        if: steps.upd.outputs.code == '2'
+        run: |
+          echo "::error::The ledger needs attention. See data/progress.json -> coverage."
+          exit 1
