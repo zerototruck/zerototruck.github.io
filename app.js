@@ -196,7 +196,14 @@ $('#refresh').onclick = async e => { const b = e.currentTarget; b.textContent = 
 })();
 
 /* timeline, milestones, FAQ, social links, analytics */
-const track = n => { try { window.goatcounter && goatcounter.count({ path: 'event/' + n, title: n, event: true }); } catch (e) {} };
+/* Analytics = GoatCounter (privacy-friendly, no cookies) used as a plain 1x1 image request. No third-party script ever runs on this page. */
+let gcHost = ''; const gcKeep = [];
+const ping = (path, title, event) => { if (!gcHost) return; try {
+  const q = new URLSearchParams({ p: path, t: title || document.title, rnd: Math.random().toString(36).slice(2) });
+  if (event) q.set('e', 'true'); else if (document.referrer) q.set('r', document.referrer);
+  const i = new Image(1, 1); i.alt = ''; i.src = `https://${gcHost}.goatcounter.com/count?${q}`; gcKeep.push(i);
+} catch (e) {} };
+const track = n => ping('event/' + n, n, true);
 function renderTimeline(ch) {
   const rows = ((ch && ch.entries) || []).slice().reverse();
   $('#timeline').innerHTML = rows.length ? rows.map(c => `<li><time>${esc(c.date)}</time><span class="tag">${esc(c.type || 'update')}</span><p>${esc(c.text)}</p></li>`).join('') : '<li>No updates yet.</li>';
@@ -219,11 +226,10 @@ function renderSocial() {
   const html = L.map(([n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${n} ↗</a>`).join('');
   $('#social').innerHTML = html; $('.nav nav').insertAdjacentHTML('beforeend', html);
 }
-function initAnalytics() { // privacy-friendly, cookie-free (GoatCounter); off until config.analytics.goatcounter is set
+function initAnalytics() { // off until config.analytics.goatcounter is set; skipped for Do-Not-Track and local previews
   const g = cfg.analytics && cfg.analytics.goatcounter;
-  if (!g || navigator.doNotTrack === '1') return;
-  const s = document.createElement('script'); s.async = true; s.src = 'https://gc.zgo.at/count.js';
-  s.dataset.goatcounter = `https://${g}.goatcounter.com/count`; document.head.append(s);
+  if (!/^[a-z0-9][a-z0-9-]{1,28}[a-z0-9]$/.test(g || '') || navigator.doNotTrack === '1' || /^(localhost|127\.0\.0\.1|\[::1\]|)$/.test(location.hostname)) return;
+  gcHost = g; ping('/', document.title);
   $('.footer-copy small').append(' · Anonymous, cookie-free visit counts');
   if ('IntersectionObserver' in window) { const o = new IntersectionObserver(es => { if (es[0].isIntersecting) { track('fuel-viewed'); o.disconnect(); } }, { threshold: .3 }); o.observe($('#fuel')); }
 }
