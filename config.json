@@ -1,7 +1,10 @@
 {
   "site": {
     "name": "Zero to Truck",
-    "url": "https://example.com"
+    "url": "https://zerototruck.github.io/"
+  },
+  "analytics": { 
+    "goatcounter": "zerototruck" 
   },
   "campaign": {
     "goal_usd": 130000,
