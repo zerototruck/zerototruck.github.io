@@ -1,1 +1,39 @@
-
+# Read-only checks. Never writes to the repository and has no secrets.
+name: verify
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "37 3 * * *"
+  workflow_dispatch:
+permissions: {}
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    env:
+      BASE: ${{ github.event.before || github.event.pull_request.base.sha || 'HEAD~1' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Unit tests (offline)
+        run: |
+          python3 -I tests/test_update_data.py
+          python3 -I tests/test_new_chains.py
+          python3 -I tests/test_workflows.py
+          python3 -I tests/test_analytics.py
+      - name: Addresses, data, ledger (append-only), vendored library
+        run: |
+          python3 -I scripts/verify_addresses.py
+          python3 -I scripts/verify_data.py --base "$BASE"
+      - name: Decode every QR image (OpenCV, pinned versions, wheels only)
+        run: |
+          python3 -m venv "$RUNNER_TEMP/qr"
+          "$RUNNER_TEMP/qr/bin/pip" install --disable-pip-version-check --only-binary=:all: opencv-python-headless==5.0.0.93 numpy==2.5.3
+          "$RUNNER_TEMP/qr/bin/python" -I scripts/verify_qr.py --generated --require
+          "$RUNNER_TEMP/qr/bin/python" -I tests/test_verify_qr.py
