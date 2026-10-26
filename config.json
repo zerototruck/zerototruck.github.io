@@ -1,147 +1,183 @@
 {
   "site": {
     "name": "Zero to Truck",
-    "url": "https://zerototruck.github.io/"
-  },
-  "analytics": { 
-    "goatcounter": "zerototruck" 
+    "hero_image": "assets/hero-truck.jpg",
+    "url": "https://zerototruck.github.io"
   },
   "campaign": {
     "goal_usd": 130000,
     "budget": [
       {
-        "item": "Volvo FH500 (2022)",
-        "amount": 100000
+        "label": "Tractor / Truck",
+        "usd": 100000
       },
       {
-        "item": "Trailer",
-        "amount": 30000
+        "label": "Trailer",
+        "usd": 30000
+      },
+      {
+        "label": "Public Goal",
+        "usd": 130000
       }
-    ]
+    ],
+    "target": "Volvo FH500 · model year 2022 · with trailer"
   },
   "assets": [
     {
       "id": "BTC",
       "name": "Bitcoin",
       "symbol": "BTC",
-      "network": "Bitcoin Native",
+      "network": "Bitcoin",
       "address": "bc1qmehruudj9ug80hun7n2rnggm9s7y4n09lh96pz",
       "qr_uri": "bc1qmehruudj9ug80hun7n2rnggm9s7y4n09lh96pz",
-      "qr_image": "assets/qr/BTC.png",
       "explorer": "https://mempool.space/address/",
-      "tx_explorer": "https://mempool.space/tx/",
+      "destination_tag": null,
       "enabled": true,
-      "warning": "Send only Bitcoin (BTC) via the native Bitcoin network.",
+      "warning": "Bitcoin network only. Send BTC, nothing else.",
+      "tx_explorer": "https://mempool.space/tx/",
       "track": {
         "kind": "btc",
-        "coingecko": "bitcoin"
-      }
+        "api": "https://mempool.space/api",
+        "coingecko": "bitcoin",
+        "coinbase": "BTC-USD",
+        "min_confirmations": 3
+      },
+      "qr_image": "assets/qr/BTC.png"
     },
     {
       "id": "ETH",
       "name": "Ethereum",
       "symbol": "ETH",
-      "network": "Ethereum (ERC-20)",
+      "network": "Ethereum / ERC-20",
       "address": "0x87C03A643d47e748aC50B022E35cb7E5a6c4fa62",
       "qr_uri": "0x87C03A643d47e748aC50B022E35cb7E5a6c4fa62",
-      "qr_image": "assets/qr/ETH.png",
       "explorer": "https://etherscan.io/address/",
-      "tx_explorer": "https://etherscan.io/tx/",
+      "destination_tag": null,
       "enabled": true,
-      "warning": "Send only ETH or ERC-20 assets to this EVM address.",
+      "warning": "Ethereum mainnet only. This address is also used on BNB Smart Chain: check the network.",
+      "tx_explorer": "https://etherscan.io/tx/",
       "track": {
-        "kind": "eth",
-        "coingecko": "ethereum"
-      }
+        "kind": "evm_native",
+        "base": "https://eth.blockscout.com",
+        "rpc": "https://ethereum-rpc.publicnode.com",
+        "decimals": 18,
+        "coingecko": "ethereum",
+        "coinbase": "ETH-USD",
+        "min_confirmations": 12
+      },
+      "qr_image": "assets/qr/ETH.png"
     },
     {
-      "id": "USDT-ETH",
-      "name": "Tether (ERC-20)",
+      "id": "USDT-ERC20",
+      "name": "Tether",
       "symbol": "USDT",
-      "network": "Ethereum (ERC-20)",
+      "network": "Ethereum / ERC-20",
       "address": "0x87C03A643d47e748aC50B022E35cb7E5a6c4fa62",
       "qr_uri": "0x87C03A643d47e748aC50B022E35cb7E5a6c4fa62",
-      "qr_image": "assets/qr/USDT-ETH.png",
       "explorer": "https://etherscan.io/address/",
-      "tx_explorer": "https://etherscan.io/tx/",
+      "destination_tag": null,
       "enabled": true,
-      "warning": "Send USDT strictly via the Ethereum (ERC-20) network.",
+      "warning": "USDT on Ethereum (ERC-20) only. Not Tron (TRC-20) or BNB Smart Chain (BEP-20).",
+      "tx_explorer": "https://etherscan.io/tx/",
       "track": {
-        "kind": "erc20",
+        "kind": "evm_token",
+        "base": "https://eth.blockscout.com",
+        "rpc": "https://ethereum-rpc.publicnode.com",
         "contract": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
-        "coingecko": "tether"
-      }
+        "decimals": 6,
+        "peg_usd": "1",
+        "min_confirmations": 12
+      },
+      "qr_image": "assets/qr/USDT-ERC20.png"
     },
     {
       "id": "USDT-TRC20",
-      "name": "Tether (TRC-20)",
+      "name": "Tether",
       "symbol": "USDT",
-      "network": "TRON (TRC-20)",
+      "network": "TRON / TRC-20",
       "address": "THdMqT5wdmin6bQ8jqtE435VsW3ryeNcTE",
       "qr_uri": "THdMqT5wdmin6bQ8jqtE435VsW3ryeNcTE",
-      "qr_image": "assets/qr/TRX.png",
       "explorer": "https://tronscan.org/#/address/",
-      "tx_explorer": "https://tronscan.org/#/transaction/",
+      "destination_tag": null,
       "enabled": true,
-      "warning": "Send USDT strictly via the TRON (TRC-20) network.",
+      "warning": "USDT on TRON (TRC-20) only. Not Ethereum (ERC-20) or BNB Smart Chain (BEP-20).",
+      "tx_explorer": "https://tronscan.org/#/transaction/",
       "track": {
-        "kind": "trc20",
+        "kind": "tron_trc20",
+        "api": "https://api.trongrid.io",
         "contract": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
-        "coingecko": "tether"
-      }
+        "decimals": 6,
+        "peg_usd": "1"
+      },
+      "qr_image": "assets/qr/USDT-TRC20.png"
     },
     {
-      "id": "USDT-BSC",
-      "name": "Tether (BEP-20)",
+      "id": "USDT-BEP20",
+      "name": "Tether",
       "symbol": "USDT",
-      "network": "BNB Smart Chain (BEP-20)",
+      "network": "BNB Smart Chain / BEP-20",
       "address": "0x87C03A643d47e748aC50B022E35cb7E5a6c4fa62",
       "qr_uri": "0x87C03A643d47e748aC50B022E35cb7E5a6c4fa62",
-      "qr_image": "assets/qr/BNB.png",
       "explorer": "https://bscscan.com/address/",
-      "tx_explorer": "https://bscscan.com/tx/",
+      "destination_tag": null,
       "enabled": true,
-      "warning": "Send USDT strictly via the BNB Smart Chain (BEP-20) network.",
+      "warning": "USDT on BNB Smart Chain (BEP-20) only. Not Ethereum (ERC-20) or Tron (TRC-20).",
+      "tx_explorer": "https://bscscan.com/tx/",
       "track": {
-        "kind": "bep20",
+        "kind": "evm_token_logs",
+        "rpc": "https://bsc-rpc.publicnode.com",
         "contract": "0x55d398326f99059fF775485246999027B3197955",
-        "coingecko": "tether"
-      }
+        "decimals": 18,
+        "peg_usd": "1",
+        "min_confirmations": 15,
+        "log_chunk": 2000,
+        "start_block": "latest"
+      },
+      "qr_image": "assets/qr/USDT-BEP20.png"
     },
     {
       "id": "BNB",
       "name": "BNB",
       "symbol": "BNB",
-      "network": "BNB Smart Chain (BEP-20)",
+      "network": "BNB Smart Chain / BEP-20",
       "address": "0x87C03A643d47e748aC50B022E35cb7E5a6c4fa62",
       "qr_uri": "0x87C03A643d47e748aC50B022E35cb7E5a6c4fa62",
-      "qr_image": "assets/qr/BNB.png",
       "explorer": "https://bscscan.com/address/",
-      "tx_explorer": "https://bscscan.com/tx/",
+      "destination_tag": null,
       "enabled": true,
-      "warning": "Send BNB via the BNB Smart Chain (BEP-20) network.",
+      "warning": "BNB Smart Chain only. This address is also used on Ethereum: check the network.",
+      "tx_explorer": "https://bscscan.com/tx/",
+      "qr_image": "assets/qr/BNB.png",
       "track": {
-        "kind": "bsc",
+        "kind": "evm_native",
+        "scan": false,
+        "rpc": "https://bsc-rpc.publicnode.com",
+        "decimals": 18,
         "coingecko": "binancecoin"
       }
     },
     {
-      "id": "USDC-ETH",
-      "name": "USD Coin (ERC-20)",
+      "id": "USDC-ERC20",
+      "name": "USD Coin",
       "symbol": "USDC",
-      "network": "Ethereum (ERC-20)",
+      "network": "Ethereum / ERC-20",
       "address": "0x87C03A643d47e748aC50B022E35cb7E5a6c4fa62",
       "qr_uri": "0x87C03A643d47e748aC50B022E35cb7E5a6c4fa62",
-      "qr_image": "assets/qr/USDC-ETH.png",
       "explorer": "https://etherscan.io/address/",
-      "tx_explorer": "https://etherscan.io/tx/",
+      "destination_tag": null,
       "enabled": true,
-      "warning": "Send USDC strictly via the Ethereum (ERC-20) network.",
+      "warning": "USDC on Ethereum (ERC-20) only. Not Base, Polygon, Arbitrum, BNB Smart Chain or Solana.",
+      "tx_explorer": "https://etherscan.io/tx/",
       "track": {
-        "kind": "erc20",
+        "kind": "evm_token",
+        "base": "https://eth.blockscout.com",
+        "rpc": "https://ethereum-rpc.publicnode.com",
         "contract": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-        "coingecko": "usd-coin"
-      }
+        "decimals": 6,
+        "peg_usd": "1",
+        "min_confirmations": 12
+      },
+      "qr_image": "assets/qr/USDC-ERC20.png"
     },
     {
       "id": "XRP",
@@ -150,66 +186,116 @@
       "network": "XRP Ledger",
       "address": "rNWPiZDS23nrbaktwBTDbmZfQDRybvhLgB",
       "qr_uri": "rNWPiZDS23nrbaktwBTDbmZfQDRybvhLgB",
-      "qr_image": "assets/qr/XRP.png",
       "explorer": "https://xrpscan.com/account/",
-      "tx_explorer": "https://xrpscan.com/tx/",
+      "destination_tag": null,
       "enabled": true,
-      "warning": "Send XRP via the XRP Ledger.",
+      "warning": "XRP Ledger only. Send XRP, not tokens. The very first payment to a brand-new account must meet the network's minimum reserve.",
+      "tx_explorer": "https://xrpscan.com/tx/",
       "track": {
         "kind": "xrp",
-        "coingecko": "ripple"
-      }
+        "api": "https://xrplcluster.com",
+        "coingecko": "ripple",
+        "coinbase": "XRP-USD",
+        "min_native": "0.001"
+      },
+      "qr_image": "assets/qr/XRP.png"
     },
     {
       "id": "SOL",
       "name": "Solana",
       "symbol": "SOL",
-      "network": "Solana Mainnet",
+      "network": "Solana",
       "address": "3WiDYV4Ddv3Mm5wovAciohjvRbpMEQLrsyeG9UGhp8DK",
       "qr_uri": "3WiDYV4Ddv3Mm5wovAciohjvRbpMEQLrsyeG9UGhp8DK",
-      "qr_image": "assets/qr/SOL.png",
       "explorer": "https://solscan.io/account/",
-      "tx_explorer": "https://solscan.io/tx/",
+      "destination_tag": null,
       "enabled": true,
-      "warning": "Send SOL strictly via the Solana network.",
+      "warning": "Solana network only. Send SOL, nothing else.",
+      "tx_explorer": "https://solscan.io/tx/",
       "track": {
         "kind": "sol",
-        "coingecko": "solana"
-      }
+        "rpc": "https://api.mainnet-beta.solana.com",
+        "coingecko": "solana",
+        "coinbase": "SOL-USD"
+      },
+      "qr_image": "assets/qr/SOL.png"
     },
     {
       "id": "TRX",
       "name": "TRON",
       "symbol": "TRX",
-      "network": "TRON Mainnet",
+      "network": "TRON",
       "address": "THdMqT5wdmin6bQ8jqtE435VsW3ryeNcTE",
       "qr_uri": "THdMqT5wdmin6bQ8jqtE435VsW3ryeNcTE",
-      "qr_image": "assets/qr/TRX.png",
       "explorer": "https://tronscan.org/#/address/",
-      "tx_explorer": "https://tronscan.org/#/transaction/",
+      "destination_tag": null,
       "enabled": true,
-      "warning": "Send TRX strictly via the TRON network.",
+      "warning": "TRON network only. Send TRX.",
+      "tx_explorer": "https://tronscan.org/#/transaction/",
       "track": {
-        "kind": "trx",
-        "coingecko": "tron"
-      }
+        "kind": "tron",
+        "api": "https://api.trongrid.io",
+        "coingecko": "tron",
+        "min_native": "0.01"
+      },
+      "qr_image": "assets/qr/TRX.png"
     },
     {
       "id": "DOGE",
       "name": "Dogecoin",
       "symbol": "DOGE",
-      "network": "Dogecoin Native",
+      "network": "Dogecoin",
       "address": "DRE2ucCnDLmwDEjoebYUxf2DYFe487F9ui",
       "qr_uri": "DRE2ucCnDLmwDEjoebYUxf2DYFe487F9ui",
-      "qr_image": "assets/qr/DOGE.png",
       "explorer": "https://dogechain.info/address/",
-      "tx_explorer": "https://dogechain.info/tx/",
+      "destination_tag": null,
       "enabled": true,
-      "warning": "Send Dogecoin (DOGE) via the Dogecoin native network.",
+      "warning": "Dogecoin network only. Much wow, no other assets.",
+      "tx_explorer": "https://dogechain.info/tx/",
       "track": {
         "kind": "doge",
-        "coingecko": "dogecoin"
-      }
+        "api": "https://api.blockchair.com/dogecoin",
+        "coingecko": "dogecoin",
+        "coinbase": "DOGE-USD",
+        "min_confirmations": 20
+      },
+      "qr_image": "assets/qr/DOGE.png"
+    }
+  ],
+  "social": {
+    "x": "https://x.com/zerototruck",
+    "instagram": ""
+  },
+  "analytics": {
+    "goatcounter": "zerototruck"
+  },
+  "tracking": {
+    "min_usd": 1,
+    "tolerance_usd": 5,
+    "max_pages": 40,
+    "exclude_tx": [],
+    "opening_balance": {}
+  },
+  "verify": {
+    "live_site": "",
+    "mirrors": []
+  },
+  "milestones": [
+    {
+      "pct": 25,
+      "line": "25% — okay, this is getting real."
+    },
+    {
+      "pct": 50,
+      "line": "50% — half a truck belongs to the internet."
+    },
+    {
+      "pct": 75,
+      "line": "75% — someone should probably find a truck."
+    },
+    {
+      "pct": 100,
+      "line": "100% — now we really have to buy the truck."
     }
   ]
 }
