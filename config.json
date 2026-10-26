@@ -277,7 +277,7 @@
     "opening_balance": {}
   },
   "verify": {
-    "live_site": "",
+    "live_site": "https://zerototruck.github.io",
     "mirrors": []
   },
   "milestones": [
